@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import ImageUploader from "./components/ImageUploader";
+import Container from "./containers/Container";
 import './App.css';
 
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
   public render() {
     return (
       <div className="App">
-        <ImageUploader />
+        <Container />
       </div>
     );
   }
