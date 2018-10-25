@@ -7,6 +7,9 @@ import Welcome from "../components/Welcome";
 import SpinLoader from "../components/SpinLoader";
 import UserPanel from "./UserPanel";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 
 class Container extends React.Component<any, any> {
 
@@ -25,17 +28,17 @@ class Container extends React.Component<any, any> {
   }
 
   imageSelectedHandler = (event: any) => {
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
     const myImage = event.target.files[0];
     const formData = new FormData();
     const types = ['image/png', 'image/jpeg', 'image/gif'];
 
     if(types.every(type => myImage.type !== type)) {
-      this.setState({alertMsg: "Your image has invalid format! :("});
-    } else if(myImage.size > 200000) {
-      this.setState({alertMsg: "Your image is too big! :("})
+      this.setState({ alertMsg: "Your image has invalid format! :(" });
+    } else if(myImage.size > 20000000) {
+      this.setState({ alertMsg: "Your image is too big! :(" });
     } else {
-      formData.append("myInage", myImage);
+      formData.append("myImage", myImage);
     }
 
     // UPLOADING START
@@ -44,58 +47,46 @@ class Container extends React.Component<any, any> {
       method: "POST",
       body: formData
     }).then(res => {
-      if (!res.ok) {
-        throw res
+      if(!res.ok) {
+        throw res;
       }
-      return res.json()
-    })
-    .then(images => {
-      console.log("IMAGES!!!! :", images);
+      return res.json();
+    }).then(images => {
       this.setState({
         uploading: false, 
         images
-      })
-    })
-    .catch(err => {
+      });
+    }).catch(err => {
       err.json().then((e: any) => {
-        this.setState({ uploading: false })
-      })
-    })
+        this.setState({ uploading: false });
+      });
+    });
   }
 
-  /*filter = (id: any) => {
-    return this.state.images.filter(img => img.public_id != id);
-  }
-
-  removeImage = id => {
-    this.setState({ images: this.filter(id) });
-  }
-
-  onError = id => {
-    alert("Something went wrong ?!?!?!?");
-    this.setState({ images: this.filter(id) });
-  }*/
+  
 
 	public render() {
-    const { initializing, uploading, images } = this.state;
+    const { initializing, uploading, images, alertMsg } = this.state;
     
     const content = () => {
       switch(true) {
         case initializing:
           return <Welcome />;
         case images.length === 1:
-          return <UserPanel images={this.state.images}/>;
+          return <UserPanel images={images}/>;
         case uploading:
           return <SpinLoader />;
         default:
-          return <InputFile onChange={this.imageSelectedHandler} />
+          return <InputFile onChange={this.imageSelectedHandler} />;
       }
     }
 
 		return (
       <div className="container">
+        <Header />
         {content()}
-        { this.state.alertMsg ? <Msg alertMsg={this.state.alertMsg} /> : null }
+        { alertMsg ? <Msg alertMsg={alertMsg} /> : null }
+        <Footer />
       </div>
 		);
 	}

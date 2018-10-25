@@ -13,16 +13,16 @@ export default (props: any) => (
 			<input type="submit" value="Rotate" />
 		</form>
 
-		<button onClick={props.onClick}>Black&amp;White</button>
+		{/*<button onClick={props.onClick}>Black&amp;White</button>*/}
 
-		<form className="editpanel__filter" onSubmit={props.onFilterSubmit}>
-    	<label>Choose filter</label>
+		<form className="editpanel__filter">
+    	<label>Choose filter:</label>
       <select value={props.filter} onChange={props.onFilterChange}>
       	<option value="none">None</option>
         <option value="blur">Blur</option>
         <option value="sepia">Sepia</option>
+        <option value="bw">Black and White</option>
       </select>
-      <input type="submit" value="Add Filter" />
     </form>
 	</div>
 );

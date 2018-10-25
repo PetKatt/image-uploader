@@ -12,8 +12,8 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 
 	state = {
 		degree: 0,
-		bw: false,
-		filter: ""
+		filter: "",
+		images: this.props.images
 	}
 
 	handleRotateChange = (e: any) => {
@@ -26,27 +26,38 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 		e.preventDefault();
 	}
 
-	handleButton = () => {
+	/*handleButton = () => {
 		this.setState((prevState: any) => ({
 			bw: !prevState.bw
 		}));
-	}
+	}*/
 
 	handleFilterChange = (e: any) => {
-		this.setState({ filter: e. target.value });
+		this.setState({ filter: e.target.value });
 	}
 
-	handleFilterSubmit = () => {
 
-	}
+
+	filter = (id: any) => {
+    return this.state.images.filter((img: any) => img.public_id != id);
+  }
+
+  removeImage = (id: any) => {
+    this.setState({ images: this.filter(id) });
+  }
+
+  /*onError = id => {
+    alert("Something went wrong ?!?!?!?");
+    this.setState({ images: this.filter(id) });
+  }*/
 
 	public render() {
 		/* Black and White*/
-		if(this.state.bw) {
+		/*if(this.state.bw) {
 			const img: any = document.querySelector("img");
 			img.style.filter = `grayscale(100%)`;
 			this.setState({ bw: false });
-		}
+		}*/
 
 		/* Filter */
 		if(this.state.filter === "blur") {
@@ -55,6 +66,9 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 		} else if(this.state.filter === "sepia") {
 			const img: any = document.querySelector("img");
 			img.style.filter = `sepia(100%)`;
+		} else if(this.state.filter === "bw") {
+			const img: any = document.querySelector("img");
+			img.style.filter = `grayscale(100%)`;
 		} else if(this.state.filter === "none") {
 			const img: any = document.querySelector("img");
 			img.style.filter = `initial`;
@@ -73,7 +87,7 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 */
 
 		/* resolution data */
-		const { images } = this.props;
+		const { images } = this.state;
 		const width: any = images[0].width;
 		const height: any = images[0].height;
 		const res = (width: any, height: any) => {
@@ -85,12 +99,10 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 				<EditPanel 
 					onRotateSubmit={this.handleRotateSubmit}
 					onRotateChange={this.handleRotateChange}
-					onClick={this.handleButton}
-					onFilterSubmit={this.handleFilterSubmit}
 					onFilterChange={this.handleFilterChange}
 					degree={this.state.degree}
 					filter={this.state.filter} />
-				<Image images={images} />
+				<Image images={images} removeImage={this.removeImage} />
 				<ResolutionWindow
 					imgRes={res(width, height)}
 					imgWidth={width}
