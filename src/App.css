@@ -31,7 +31,7 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: getDown 1.5s cubic-bezier(0.17, 0.59, 0.83, 0.67) 4.5s;
+  animation: getDown 1s cubic-bezier(0.17, 0.59, 0.83, 0.67) 2.5s;
   animation-fill-mode: forwards; }
 
 .loader {
@@ -40,7 +40,7 @@ div {
   height: 12em;
   border-top: 5px solid #D40A53;
   border-radius: 50%;
-  animation: rolling 2s linear infinite; }
+  animation: rolling .8s linear infinite; }
   .loader:before {
     position: absolute;
     top: 8px;
@@ -51,7 +51,7 @@ div {
     height: 11em;
     border-left: 5px solid #A982C1;
     border-radius: 50%;
-    animation: rolling 1.5s linear infinite reverse; }
+    animation: rolling 1.2s cubic-bezier(0.17, 0.59, 0.83, 0.67) infinite reverse; }
   .loader:after {
     position: absolute;
     top: 18px;
@@ -62,32 +62,37 @@ div {
     height: 10em;
     border-right: 5px solid #B9C406;
     border-radius: 50%;
-    animation: rolling 1s linear infinite; }
+    animation: rolling .7s linear infinite; }
 
 .left-screen {
   position: absolute;
   left: 0;
-  width: 50%;
+  width: 52%;
   height: 100%;
   background-color: #000000;
-  animation: revealLeft .43s ease-in-out 4.5s;
+  animation: revealLeft .43s ease-in-out 2.5s;
   animation-fill-mode: forwards; }
 
 .right-screen {
   position: absolute;
   right: 0;
-  width: 50%;
+  width: 52%;
   height: 100%;
   background-color: #000000;
-  animation: revealRight .43s ease-in-out 4.5s;
+  animation: revealRight .43s ease-in-out 2.5s;
   animation-fill-mode: forwards; }
 
+.welcome {
+  display: flex;
+  flex-flow: column wrap; }
+  .welcome h1, .welcome h2, .welcome h4 {
+    margin: .6em 0; }
+
 .container {
-  margin: 0 auto;
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: space-around; }
 
@@ -96,7 +101,7 @@ header {
   text-align: center; }
   header h2 {
     font-size: 2em;
-    text-shadow: 2px 0 3px #D40A53; }
+    text-shadow: 5px 0 8px #824BA8; }
 
 .input {
   display: flex;
@@ -105,7 +110,10 @@ header {
   .input label {
     cursor: pointer;
     border-radius: 20%;
-    box-shadow: .5em .5em 1.5em .2em #BD91CF, -.5em .5em 1.5em .2em #BD91CF, .5em -.5em 1.5em .2em #BD91CF, -.5em -.5em 1.5em .2em #BD91CF; }
+    box-shadow: 0.5em 0.5em 1.5em 0.2em #A982C1, -0.5em 0.5em 1.5em 0.2em #A982C1, 0.5em -0.5em 1.5em 0.2em #A982C1, -0.5em -0.5em 1.5em 0.2em #A982C1;
+    transition: filter .23s linear .1s; }
+    .input label:hover {
+      filter: drop-shadow(10px 10px 10px #D40A53) invert(10%); }
   .input input {
     visibility: hidden; }
 
@@ -120,32 +128,30 @@ footer {
   footer p {
     margin-top: 1em; }
     footer p strong {
-      text-shadow: .5px 0 1px #D40A53; }
+      text-shadow: 1px 0 1px #824BA8; }
 
 .spinner {
-  box-shadow: 0 0 2em 5em #B9C406;
+  box-shadow: 0 0 2em 5em #D40A53;
   border-radius: 2%; }
   .spinner svg {
     animation: fall 1s; }
 
 .userpanel {
+  width: 100%;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
-  justify-content: space-around;
-  width: 90%; }
+  justify-content: space-around; }
   .userpanel .image {
-    min-width: 80%;
-    min-height: 80%;
     text-align: center; }
     .userpanel .image img {
-      box-shadow: 0.6em 0.6em 2em 0.5em #252525;
+      box-shadow: 0.6em 0.6em 2em 0.5em #252525, 0.3em 0.3em 2em 0.2em #A982C1;
       max-width: 1200px;
       max-height: 750px; }
 
 .editpanel {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: center; }
   .editpanel form {
@@ -169,12 +175,9 @@ footer {
       border-radius: 2em;
       transition: all .43s ease-out; }
       .editpanel form input[type="submit"]:hover {
-        background-color: #9b69bb;
+        background-color: #9b6abc;
         color: #ffffff;
-        border: 1px solid #663b83; }
-
-.resolution {
-  min-width: 100px; }
+        border: 1px solid #673b85; }
 
 .alert {
   position: absolute;
@@ -241,8 +244,6 @@ footer {
     transform: scale(1.15, 1.2); } }
 
 @media only screen and (max-width: 1380px) {
-  .container {
-    width: 90%; }
   .userpanel .image img {
     max-width: 700px;
     max-height: 450px; }
@@ -251,14 +252,13 @@ footer {
 
 @media only screen and (max-width: 860px) {
   .container {
-    width: 80%; }
-  .userpanel {
+    display: flex;
     flex-flow: column wrap; }
-    .userpanel .image {
-      min-width: 60%;
-      min-height: 50%; }
-      .userpanel .image img {
-        max-width: 400px;
-        max-height: 450px; }
+  .userpanel {
+    display: flex;
+    flex-flow: column wrap; }
+    .userpanel .image img {
+      max-width: 400px;
+      max-height: 450px; }
   .resolution {
     margin-top: 1.5em; } }

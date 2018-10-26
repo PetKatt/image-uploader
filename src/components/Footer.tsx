@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 
+
 export default () => (
 	<footer>
 		<a
@@ -9,6 +10,6 @@ export default () => (
 			title="GitHub repository">
 			<FontAwesomeIcon icon={faGithub} size='3x' color='#000000' />
 		</a>
-		<p><em>Designed by</em> <strong>Piotr Wiercinski</strong></p>
+		<p><em>Designed by</em><strong>Piotr Wiercinski</strong></p>
 	</footer>
 );

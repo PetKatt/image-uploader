@@ -6,16 +6,16 @@ import InputFile from "../components/InputFile";
 import Welcome from "../components/Welcome";
 import SpinLoader from "../components/SpinLoader";
 import UserPanel from "./UserPanel";
-
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 interface State {
   initializing: boolean,
   uploading: boolean,
-  images?: object,
-  alertMsg?: string
+  images: object[],
+  alertMsg: string
 }
+
 
 class Container extends React.Component<object, State> {
 
@@ -37,11 +37,11 @@ class Container extends React.Component<object, State> {
     // console.log(event.target.files[0]);
     const myImage = event.target.files[0];
     const formData = new FormData();
-    const types = ['image/png', 'image/jpeg', 'image/gif'];
+    const types = ['image/jpeg', 'image/png', 'image/gif'];
 
     if(types.every(type => myImage.type !== type)) {
       this.setState({ alertMsg: "Your image has invalid format! :(" });
-    } else if(myImage.size > 20000000) {
+    } else if(myImage.size > 200000) {
       this.setState({ alertMsg: "Your image is too big! :(" });
     } else {
       formData.append("myImage", myImage);
@@ -69,7 +69,10 @@ class Container extends React.Component<object, State> {
     });
   }
 
-  
+  removeImage = (): void => {
+    this.setState({ images: [] });
+  }
+
 
 	public render() {
     const { initializing, uploading, images, alertMsg } = this.state;
@@ -79,7 +82,7 @@ class Container extends React.Component<object, State> {
         case initializing:
           return <Welcome />;
         case images.length > 0:
-          return <UserPanel images={images}/>;
+          return <UserPanel images={images} removeImage={this.removeImage}/>;
         case uploading:
           return <SpinLoader />;
         default:

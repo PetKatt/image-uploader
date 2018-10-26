@@ -8,10 +8,9 @@ class App extends React.Component<any, any> {
   public render() {
 
   	/* background moving */
-  	const translateBack = (e: any) => {
-			console.log(e.pageX, e.pageY);
-			let pageX = -((e.pageX - screen.width / 2) / 5);
-			let pageY = -((e.pageY - screen.height / 2) / 5);
+  	const translateBack: ((event: any) => void) = (e) => {
+			let pageX: number = -((e.pageX - screen.width / 2) / 5);
+			let pageY: number = -((e.pageY - screen.height / 2) / 5);
 			document.body.style.backgroundPosition = `${pageX}px ${pageY}px`;
 		}
 		document.body.addEventListener("mousemove", translateBack);

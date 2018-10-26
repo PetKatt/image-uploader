@@ -5,66 +5,39 @@ import Image from "../components/UserPanel/Image";
 import ResolutionWindow from "../components/UserPanel/ResolutionWindow";
 
 interface Props {
-	images: any
+	images: any[],
+	removeImage: (() => void)
 }
 
 interface State {
 	degree: number,
-	filter?: string,
-	images: object
+	filter: string
 }
+
 
 class UserPanel extends React.Component<Props, State> {
 
 	state = {
 		degree: 0,
-		filter: "",
-		images: this.props.images || []
+		filter: ""
 	}
 
-	handleRotateChange = (e: any) => {
+	handleRotateChange = (e: any): void => {
 		this.setState({ degree: e.target.value });
 	}
 
-	handleRotateSubmit = (e: any) => {
+	handleRotateSubmit = (e: any): void => {
 		const img: any = document.querySelector("img");
 		img.style.transform = `rotate(${this.state.degree}deg)`;
 		e.preventDefault();
 	}
 
-	/*handleButton = () => {
-		this.setState((prevState: any) => ({
-			bw: !prevState.bw
-		}));
-	}*/
-
-	handleFilterChange = (e: any) => {
+	handleFilterChange = (e: any): void => {
 		this.setState({ filter: e.target.value });
 	}
-
-
-
-	filter = (id: number) => {
-    return this.state.images.filter((img: any) => img.public_id != id);
-  }
-
-  removeImage = (id: number) => {
-    this.setState({ images: this.filter(id) });
-  }
-
-  /*onError = id => {
-    alert("Something went wrong ?!?!?!?");
-    this.setState({ images: this.filter(id) });
-  }*/
+	
 
 	public render() {
-		/* Black and White*/
-		/*if(this.state.bw) {
-			const img: any = document.querySelector("img");
-			img.style.filter = `grayscale(100%)`;
-			this.setState({ bw: false });
-		}*/
-
 		/* Filter */
 		if(this.state.filter === "blur") {
 			const img: any = document.querySelector("img");
@@ -80,20 +53,8 @@ class UserPanel extends React.Component<Props, State> {
 			img.style.filter = `initial`;
 		}
 
-/*
-		const imgClasses: any = [];
-		if(this.state.bw) {
-			imgClasses.push("blackandwhite");
-		} else {
-			const index: any = imgClasses.findIndex(x: any => x == "blackandwhite");
-			if(index !== -1) {
-				imgClasses.pull();
-			}
-		}
-*/
-
 		/* resolution data */
-		const { images } = this.state;
+		const { images } = this.props;
 		const width: number = images[0].width;
 		const height: number = images[0].height;
 		const res = (width: number, height: number) => {
@@ -108,7 +69,7 @@ class UserPanel extends React.Component<Props, State> {
 					onFilterChange={this.handleFilterChange}
 					degree={this.state.degree}
 					filter={this.state.filter} />
-				<Image images={images} removeImage={this.removeImage} />
+				<Image images={images} removeImage={this.props.removeImage} />
 				<ResolutionWindow
 					imgRes={res(width, height)}
 					imgWidth={width}

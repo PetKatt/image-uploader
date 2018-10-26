@@ -8,6 +8,7 @@ interface Props {
 	onFilterChange: ((e: any) => void)
 }
 
+
 export default (props: Props) => (
 	<div className="editpanel">
 		<form className="editpanel__rotate" onSubmit={props.onRotateSubmit}>
@@ -20,8 +21,6 @@ export default (props: Props) => (
 				placeholder="Enter rotation degree..." />
 			<input type="submit" value="Rotate" />
 		</form>
-
-		{/*<button onClick={props.onClick}>Black&amp;White</button>*/}
 
 		<form className="editpanel__filter">
     	<label>Choose filter:</label>
