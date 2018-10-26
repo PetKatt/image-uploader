@@ -1,12 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
-body {
-  margin: 0; }
-
-h1, h2, h3, h4, h5, h6, p {
+body, h1, h2, h3, h4, h5, h6, p, ul, ol {
   margin: 0; }
 
 ul, ol {
-  margin: 0;
   padding: 0; }
 
 html {
@@ -14,11 +10,77 @@ html {
 
 body {
   line-height: 1.5em;
-  background-color: #F4F3F4;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Montserrat', sans-serif;
+  background: url("img/blank-clean-color-889087.jpg") 100px 100px;
+  animation: scaleIn 5s ease-in-out reverse; }
 
 div {
   box-sizing: border-box; }
+
+.App {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.loader-container {
+  width: 100%;
+  height: 40%;
+  position: fixed;
+  top: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: getDown 1.5s cubic-bezier(0.17, 0.59, 0.83, 0.67) 4.5s;
+  animation-fill-mode: forwards; }
+
+.loader {
+  position: relative;
+  width: 12em;
+  height: 12em;
+  border-top: 5px solid #D40A53;
+  border-radius: 50%;
+  animation: rolling 2s linear infinite; }
+  .loader:before {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    content: "";
+    display: block;
+    width: 11em;
+    height: 11em;
+    border-left: 5px solid #A982C1;
+    border-radius: 50%;
+    animation: rolling 1.5s linear infinite reverse; }
+  .loader:after {
+    position: absolute;
+    top: 18px;
+    left: 17px;
+    content: "";
+    display: block;
+    width: 10em;
+    height: 10em;
+    border-right: 5px solid #B9C406;
+    border-radius: 50%;
+    animation: rolling 1s linear infinite; }
+
+.left-screen {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #000000;
+  animation: revealLeft .43s ease-in-out 4.5s;
+  animation-fill-mode: forwards; }
+
+.right-screen {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #000000;
+  animation: revealRight .43s ease-in-out 4.5s;
+  animation-fill-mode: forwards; }
 
 .container {
   margin: 0 auto;
@@ -29,9 +91,12 @@ div {
   align-items: center;
   justify-content: space-around; }
 
-header h2 {
-  font-size: 2em;
-  text-shadow: 2px 0 3px #D40A53; }
+header {
+  width: 100%;
+  text-align: center; }
+  header h2 {
+    font-size: 2em;
+    text-shadow: 2px 0 3px #D40A53; }
 
 .input {
   display: flex;
@@ -45,6 +110,7 @@ header h2 {
     visibility: hidden; }
 
 footer {
+  width: 100%;
   text-align: center; }
   footer a {
     opacity: 0.5;
@@ -73,6 +139,7 @@ footer {
     min-height: 80%;
     text-align: center; }
     .userpanel .image img {
+      box-shadow: 0.6em 0.6em 2em 0.5em #252525;
       max-width: 1200px;
       max-height: 750px; }
 
@@ -100,17 +167,23 @@ footer {
       cursor: pointer;
       border: 1px solid transparent;
       border-radius: 2em;
-      transition: all 0.43s cubic-bezier(0.17, 0.59, 0.83, 0.67); }
+      transition: all .43s ease-out; }
       .editpanel form input[type="submit"]:hover {
         background-color: #9b69bb;
         color: #ffffff;
         border: 1px solid #663b83; }
 
+.resolution {
+  min-width: 100px; }
+
 .alert {
   position: absolute;
   z-index: 11;
   padding: 10em;
-  border: 3em solid red; }
+  border: 3em solid #f90000;
+  background-color: #000000;
+  color: #f90000;
+  text-shadow: 1em 1em 1em #ffffff, -1em 1em 1em #ffffff, 1em -1em 1em #ffffff, -1em -1em 1em #ffffff; }
   .alert h1 {
     font-size: 5eml; }
 
@@ -141,12 +214,40 @@ footer {
   to {
     transform: translateY(0); } }
 
+@keyframes revealLeft {
+  from {
+    transform: translateX(0); }
+  to {
+    transform: translateX(-100%); } }
+
+@keyframes revealRight {
+  from {
+    transform: translateX(0); }
+  to {
+    transform: translateX(100%); } }
+
+@keyframes getDown {
+  from {
+    transform: translateY(0);
+    opacity: 1; }
+  to {
+    transform: translateY(1000px);
+    opacity: 0; } }
+
+@keyframes scaleIn {
+  from {
+    transform: scale(1, 1); }
+  to {
+    transform: scale(1.15, 1.2); } }
+
 @media only screen and (max-width: 1380px) {
   .container {
     width: 90%; }
   .userpanel .image img {
     max-width: 700px;
-    max-height: 450px; } }
+    max-height: 450px; }
+  .loader-container {
+    top: 200px; } }
 
 @media only screen and (max-width: 860px) {
   .container {
@@ -158,4 +259,6 @@ footer {
       min-height: 50%; }
       .userpanel .image img {
         max-width: 400px;
-        max-height: 450px; } }
+        max-height: 450px; }
+  .resolution {
+    margin-top: 1.5em; } }

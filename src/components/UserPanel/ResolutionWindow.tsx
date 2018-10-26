@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-export default (props: any) => (
+interface Props {
+	imgRes: number,
+	imgWidth: number,
+	imgHeight: number
+}
+
+export default (props: Props) => (
 	<div className="resolution">
 		<h3>Resolution</h3>
 		<div>{props.imgRes} pixels</div>

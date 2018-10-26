@@ -4,16 +4,22 @@ import EditPanel from "../components/UserPanel/EditPanel";
 import Image from "../components/UserPanel/Image";
 import ResolutionWindow from "../components/UserPanel/ResolutionWindow";
 
-interface IChildComponentsProps extends React.Props<any> {
+interface Props {
 	images: any
 }
 
-class UserPanel extends React.Component<IChildComponentsProps, any> {
+interface State {
+	degree: number,
+	filter?: string,
+	images: object
+}
+
+class UserPanel extends React.Component<Props, State> {
 
 	state = {
 		degree: 0,
 		filter: "",
-		images: this.props.images
+		images: this.props.images || []
 	}
 
 	handleRotateChange = (e: any) => {
@@ -38,11 +44,11 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 
 
 
-	filter = (id: any) => {
+	filter = (id: number) => {
     return this.state.images.filter((img: any) => img.public_id != id);
   }
 
-  removeImage = (id: any) => {
+  removeImage = (id: number) => {
     this.setState({ images: this.filter(id) });
   }
 
@@ -88,9 +94,9 @@ class UserPanel extends React.Component<IChildComponentsProps, any> {
 
 		/* resolution data */
 		const { images } = this.state;
-		const width: any = images[0].width;
-		const height: any = images[0].height;
-		const res = (width: any, height: any) => {
+		const width: number = images[0].width;
+		const height: number = images[0].height;
+		const res = (width: number, height: number) => {
 			return width * height;
 		} 
 

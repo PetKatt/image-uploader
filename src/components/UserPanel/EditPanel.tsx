@@ -1,6 +1,14 @@
 import * as React from 'react';
 
-export default (props: any) => (
+interface Props {
+	onRotateSubmit: ((e: any) => void),
+	degree: number,
+	onRotateChange: ((e: any) => void),
+	filter: string,
+	onFilterChange: ((e: any) => void)
+}
+
+export default (props: Props) => (
 	<div className="editpanel">
 		<form className="editpanel__rotate" onSubmit={props.onRotateSubmit}>
 			<label htmlFor="rotate">Rotate:</label>

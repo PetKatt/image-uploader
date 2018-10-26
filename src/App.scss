@@ -1,18 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 $snappy: cubic-bezier(.17,.59,.83,.67);
+$harsh-red: #f90000;
+$grey: #252525; 
+
+$red: #D40A53;
+$skull: #F3F3F3;
+$lightPurple: #A982C1;
+$darkPurple: #824BA8; 
+$limo: #B9C406;
 
 // reset
-body {
-	margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6, p {
+body, h1, h2, h3, h4, h5, h6, p, ul, ol {
 	margin: 0;
 }
 
 ul, ol {
-	margin: 0;
 	padding: 0;
 }
 
@@ -23,12 +26,89 @@ html {
 
 body {
 	line-height: 1.5em;
-	background-color: #F4F3F4;
 	font-family: 'Montserrat', sans-serif;
+	background: url("img/blank-clean-color-889087.jpg") 100px 100px;
+	animation: scaleIn 5s ease-in-out reverse;
 }
 
 div {
 	box-sizing: border-box;
+}
+
+// APP
+.App {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// LOADER
+.loader-container {
+	width: 100%;
+	height: 40%;
+	position: fixed;
+	top: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: getDown 1.5s $snappy 4.5s;
+	animation-fill-mode: forwards;
+}
+
+.loader {
+	position: relative;
+	width: 12em;
+	height: 12em;
+	border-top: 5px solid $red;
+	border-radius: 50%;
+	animation: rolling 2s linear infinite;
+
+	&:before {
+		position: absolute;
+		top: 8px;
+		left: 8px;
+		content: "";
+		display: block;
+		width: 11em;
+		height: 11em;
+		border-left: 5px solid $lightPurple;
+		border-radius: 50%;
+		animation: rolling 1.5s linear infinite reverse;
+	}
+
+	&:after {
+		position: absolute;
+		top: 18px;
+		left: 17px;
+		content: "";
+		display: block;
+		width: 10em;
+		height: 10em;
+		border-right: 5px solid $limo;
+		border-radius: 50%;
+		animation: rolling 1s linear infinite;
+	}
+}
+
+.left-screen {
+	position: absolute;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background-color: #000000;
+	animation: revealLeft .43s ease-in-out 4.5s;
+	animation-fill-mode: forwards;
+}
+
+.right-screen {
+	position: absolute;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	background-color: #000000;
+	animation: revealRight .43s ease-in-out 4.5s;
+	animation-fill-mode: forwards;
 }
 
 // CONTAINER
@@ -43,6 +123,9 @@ div {
 }
 
 header {
+	width: 100%;
+	text-align: center;
+
 	h2 {
 		font-size: 2em;
 		text-shadow: 2px 0 3px #D40A53;
@@ -69,6 +152,7 @@ header {
 }
 
 footer {
+	width: 100%;
 	text-align: center;
 	a {
 		opacity: 0.5;
@@ -108,10 +192,10 @@ footer {
 		min-width: 80%;
 		min-height: 80%;
 		text-align: center;
-		
+
 
 		img {
-			
+			box-shadow: .6em .6em 2em .5em $grey;
 			max-width: 1200px;
 			max-height: 750px;
 		}
@@ -149,7 +233,7 @@ footer {
 			cursor: pointer;
 			border: 1px solid transparent;
 			border-radius: 2em;
-			transition: all .43s $snappy;
+			transition: all .43s ease-out;
 
 			&:hover {
 				background-color: lighten(#824BA6, 10%);
@@ -171,12 +255,19 @@ footer {
 
 }
 
+.resolution {
+	min-width: 100px;
+}
+
 // MSG
 .alert {
 	position: absolute;
 	z-index: 11;
 	padding: 10em;
-	border: 3em solid red;
+	border: 3em solid $harsh-red;
+	background-color: #000000;
+	color: $harsh-red;
+	text-shadow: 1em 1em 1em #ffffff, -1em 1em 1em #ffffff, 1em -1em 1em #ffffff, -1em -1em 1em #ffffff; 
 
 	h1 {
 		font-size: 5eml
@@ -224,6 +315,44 @@ footer {
 	}
 }
 
+@keyframes revealLeft {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes revealRight {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes getDown {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(1000px);
+		opacity: 0;
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		transform: scale(1, 1);
+	}
+	to {
+		transform: scale(1.15, 1.2);
+	}
+}
+
 
 // MEDIA QUERIES
 @media only screen and (max-width: 1380px) {
@@ -240,6 +369,10 @@ footer {
 				max-height: 450px;
 			}
 		}
+  }
+
+  .loader-container {
+  	top: 200px;
   }
 }
 
@@ -260,5 +393,9 @@ footer {
 				max-height: 450px;
 			}
 		}
+  }
+
+  .resolution {
+  	margin-top: 1.5em;
   }
 }

@@ -9,6 +9,6 @@ export default () => (
 			title="GitHub repository">
 			<FontAwesomeIcon icon={faGithub} size='3x' color='#000000' />
 		</a>
-		<p> <em>Designed by</em> <strong>Piotr Wiercinski</strong></p>
+		<p><em>Designed by</em> <strong>Piotr Wiercinski</strong></p>
 	</footer>
 );

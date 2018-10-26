@@ -1,5 +1,7 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  /*"extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],*/
+  "extends": [],
+  "defaultSeverity": "warning",
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -8,9 +10,7 @@
       "src/**/**/*.tsx",
       "src/**/**/*.ts",
       "src/**/*.tsx",
-      "src/*.tsx",
-      "backend/**/*.tsx",
-      "backend/*.tsx"
+      "src/*.tsx"
     ]
   },
   "rules": {

@@ -10,8 +10,14 @@ import UserPanel from "./UserPanel";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+interface State {
+  initializing: boolean,
+  uploading: boolean,
+  images?: object,
+  alertMsg?: string
+}
 
-class Container extends React.Component<any, any> {
+class Container extends React.Component<object, State> {
 
 	state = {
     initializing: true,
@@ -57,7 +63,7 @@ class Container extends React.Component<any, any> {
         images
       });
     }).catch(err => {
-      err.json().then((e: any) => {
+      err.json().then((e: object) => {
         this.setState({ uploading: false });
       });
     });
@@ -72,7 +78,7 @@ class Container extends React.Component<any, any> {
       switch(true) {
         case initializing:
           return <Welcome />;
-        case images.length === 1:
+        case images.length > 0:
           return <UserPanel images={images}/>;
         case uploading:
           return <SpinLoader />;
