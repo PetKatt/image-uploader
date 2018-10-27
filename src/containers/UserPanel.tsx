@@ -13,12 +13,7 @@ interface State {
 	degree: number,
 	filterSelected: string,
 	style: object,
-	colorOneRed: number,
-	colorOneGreen: number,
-	colorOneBlue: number,
-	colorTwoRed: number,
-	colorTwoGreen: number,
-	colorTwoBlue: number
+	duotoneObj: object
 }
 
 
@@ -31,12 +26,14 @@ class UserPanel extends React.Component<Props, State> {
 			maxWidth: "1000px",
 			maxHeight: "700px"
 		},
-		colorOneRed: 40,
-		colorOneGreen: 120,
-		colorOneBlue: 120,
-		colorTwoRed: 60,
-		colorTwoGreen: 150,
-		colorTwoBlue: 150
+		duotoneObj: {
+			colorOneRED: 40,
+			colorOneGREEN: 120,
+			colorOneBLUE: 120,
+			colorTwoRED: 60,
+			colorTwoGREEN: 150,
+			colorTwoBLUE: 150
+		}
 	}
 
 	handleRotateChange = (e: any): void => {
@@ -52,7 +49,6 @@ class UserPanel extends React.Component<Props, State> {
 	handleFilterChange = (e: any): void => {
 		this.setState({ filterSelected: e.target.value });
 	}
-
 
 	handleWidthChange = (id: string): void => {
 		switch(true) {
@@ -73,26 +69,27 @@ class UserPanel extends React.Component<Props, State> {
 
 	/* duotone filter change handlers*/
 	colorOneRedChange = (e: any): void => {
-		this.setState({ colorOneRed: e.target.value });
+		this.setState({ duotoneObj: { colorOneRED: e.target.value }});
 	}
 	colorOneGreenChange = (e: any): void => {
-		this.setState({ colorOneGreen: e.target.value });
+		this.setState({ duotoneObj: { colorOneGREEN: e.target.value }});
 	}
 	colorOneBlueChange = (e: any): void => {
-		this.setState({ colorOneBlue: e.target.value });
+		this.setState({ duotoneObj: { colorOneBLUE: e.target.value }});
 	}
 	colorTwoRedChange = (e: any): void => {
-		this.setState({ colorTwoRed: e.target.value });
+		this.setState({ duotoneObj: { colorTwoRED: e.target.value }});
 	}
 	colorTwoGreenChange = (e: any): void => {
-		this.setState({ colorTwoGreen: e.target.value });
+		this.setState({ duotoneObj: { colorTwoGREEN: e.target.value }});
 	}
 	colorTwoBlueChange = (e: any): void => {
-		this.setState({ colorTwoBlue: e.target.value });
+		this.setState({ duotoneObj: { colorTwoBLUE: e.target.value }});
 	}	
 
+
 	public render() {
-		const { degree, filterSelected, style } = this.state;
+		const { degree, filterSelected, style, duotoneObj } = this.state;
 		const svgStyle: object = {
 			boxShadow: ".6em .6em 2em .5em #252525, .3em .3em 2em .2em #A982C1"
 		}
@@ -140,8 +137,16 @@ class UserPanel extends React.Component<Props, State> {
 		} 
 
 		/* duotone filter arrays*/
-		const colorOneArray: number[] = [this.state.colorOneRed, this.state.colorOneGreen, this.state.colorOneBlue];
-		const colorTwoArray: number[] = [this.state.colorTwoRed, this.state.colorTwoGreen, this.state.colorTwoBlue];
+		const colorOneArray: number[] = [duotoneObj["colorOneRED"], duotoneObj["colorOneGREEN"], duotoneObj["colorOneBLUE"]];
+		const colorTwoArray: number[] = [duotoneObj["colorTwoRED"], duotoneObj["colorTwoGREEN"], duotoneObj["colorTwoBLUE"]];
+		const duotoneObjChange: object = {
+			colorOneRedChange: this.colorOneRedChange,
+			colorOneGreenChange: this.colorOneGreenChange,
+			colorOneBlueChange: this.colorOneBlueChange,
+			colorTwoRedChange: this.colorTwoRedChange,
+			colorTwoGreenChange: this.colorTwoGreenChange,
+			colorTwoBlueChange: this.colorTwoBlueChange
+		};
 
 
 		return (
@@ -152,19 +157,8 @@ class UserPanel extends React.Component<Props, State> {
 					onFilterChange={this.handleFilterChange}
 					degree={degree}
 					filter={filterSelected}
-					colorOneRed={this.state.colorOneRed}
-					colorOneGreen={this.state.colorOneGreen}
-					colorOneBlue={this.state.colorOneBlue}
-					colorTwoRed={this.state.colorTwoRed}
-					colorTwoGreen={this.state.colorTwoGreen}
-					colorTwoBlue={this.state.colorTwoBlue}
-					colorOneRedChange={this.colorOneRedChange}
-					colorOneGreenChange={this.colorOneGreenChange}
-					colorOneBlueChange={this.colorOneBlueChange}
-					colorTwoRedChange={this.colorTwoRedChange}
-					colorTwoGreenChange={this.colorTwoGreenChange}
-					colorTwoBlueChange={this.colorTwoBlueChange}
-								/>
+					duotoneObj={duotoneObj}
+					duotoneObjChange={duotoneObjChange} />
 				{/*<Image images={images} removeImage={this.props.removeImage} />*/}
 				<ImageFilter
 					className="image fadein"
@@ -173,8 +167,7 @@ class UserPanel extends React.Component<Props, State> {
 	        image={images[0].secure_url}
 	        filter={ filterType }
 	        colorOne={ colorOneArray }
-	        colorTwo={ colorTwoArray }
-	      />
+	        colorTwo={ colorTwoArray } />
 				<ResolutionWindow
 					imgRes={res(width, height)}
 					imgWidth={width}
