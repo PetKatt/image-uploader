@@ -100,7 +100,6 @@ div {
   justify-content: space-around; }
 
 header {
-  width: 100%;
   text-align: center;
   margin-bottom: 1em; }
   header h2 {
@@ -153,39 +152,29 @@ footer {
   align-items: center;
   justify-content: space-around; }
   .userpanel .image {
-    text-align: center;
-    margin: .5em 0; }
-    .userpanel .image svg {
-      opacity: 0.7;
-      transition: opacity .23s linear; }
-      .userpanel .image svg:hover {
-        opacity: 1;
-        cursor: pointer; }
-    .userpanel .image img {
-      box-shadow: 0.6em 0.6em 2em 0.5em #252525, 0.3em 0.3em 2em 0.2em #A982C1;
-      max-width: 1200px;
-      max-height: 750px; }
+    box-shadow: 0.6em 0.6em 2em 0.5em #252525, 0.3em 0.3em 2em 0.2em #A982C1; }
 
 .editpanel {
   display: flex;
   flex-flow: column wrap;
   align-items: flex-start;
   justify-content: center; }
+  .editpanel input, .editpanel select {
+    padding: .5em;
+    padding: .5em;
+    border-radius: 2em;
+    border: none;
+    outline: none; }
+  .editpanel label, .editpanel legend {
+    margin-right: .5em;
+    color: #824BA8;
+    font-weight: bold;
+    text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff; }
   .editpanel form {
     margin: 1.5em 0; }
-    .editpanel form label {
-      margin-right: .5em;
-      color: #824BA8;
-      font-weight: bold;
-      text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff; }
-    .editpanel form input[type="number"], .editpanel form select {
-      padding: 1em;
-      border-radius: 2em;
-      border: none;
-      outline: none; }
     .editpanel form input[type="submit"] {
       width: 100%;
-      padding: 1em 0;
+      padding: .5em 0;
       margin-top: .5em;
       cursor: pointer;
       border: 3px solid #A982C1;
@@ -198,6 +187,17 @@ footer {
         border: 3px solid #673b85; }
   .editpanel .editpanel__rotate, .editpanel .editpanel__filter {
     width: 100%; }
+  .editpanel fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-flow: column wrap; }
+    .editpanel fieldset input {
+      margin: 0 0 .3em 0; }
+    .editpanel fieldset label {
+      font-style: italic;
+      font-size: .8em; }
 
 .resolution {
   margin: 1.5em; }
@@ -278,9 +278,6 @@ footer {
     transform: scale(1.15, 1.2); } }
 
 @media only screen and (max-width: 1380px) {
-  .image img {
-    max-width: 700px;
-    max-height: 450px; }
   .loader-container {
     top: 200px; }
   .alert {
@@ -295,9 +292,6 @@ footer {
   .userpanel {
     display: flex;
     flex-flow: column wrap; }
-    .userpanel .image img {
-      max-width: 400px;
-      max-height: 250px; }
   .alert {
     padding: 3em; }
     .alert h1 {
@@ -306,7 +300,4 @@ footer {
 @media only screen and (max-height: 800px) and (max-width: 720px) {
   .container {
     display: flex;
-    flex-flow: row wrap; }
-  .userpanel .image img {
-    max-width: 400px;
-    max-height: 250px; } }
+    flex-flow: row wrap; } }

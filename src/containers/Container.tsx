@@ -82,7 +82,7 @@ class Container extends React.Component<object, State> {
         case initializing:
           return <Welcome />;
         case images.length > 0:
-          return <UserPanel images={images} removeImage={this.removeImage}/>;
+          return <UserPanel images={images} />;
         case uploading:
           return <SpinLoader />;
         default:
@@ -92,7 +92,7 @@ class Container extends React.Component<object, State> {
 
 		return (
       <div className="container">
-        <Header />
+        <Header removeImage={this.removeImage} />
         {content()}
         { alertMsg ? <Msg alertMsg={alertMsg} /> : null }
         <Footer />
