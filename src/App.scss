@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,700i');
 
 $snappy: cubic-bezier(.17,.59,.83,.67);
 $harsh-red: #f90000;
 $grey: #252525; 
-
 $red: #D40A53;
 $skull: #F3F3F3;
 $lightPurple: #A982C1;
@@ -115,6 +114,9 @@ div {
 .welcome {
 	display: flex;
 	flex-flow: column wrap;
+	font-weight: 700;
+	font-style: italic;
+	letter-spacing: 5px;
 
 	h1, h2, h4 {
 		margin: .6em 0;
@@ -134,10 +136,19 @@ div {
 header {
 	width: 100%;
 	text-align: center;
+	margin-bottom: 1em;
 
 	h2 {
-		font-size: 2em;
+		font-size: 2.8em;
+		letter-spacing: .15em;
+		line-height: 1em;
 		text-shadow: 5px 0 8px $darkPurple;
+		transition: text-shadow .23s ease .1s;
+
+		&:hover {
+			text-shadow: 5px 0 8px $darkPurple, 5px 5px 10px lighten($darkPurple, 50%), -5px -5px 10px lighten($darkPurple, 50%);
+			cursor: pointer;
+		}
 	}	
 }
 
@@ -203,7 +214,17 @@ footer {
 
 	.image {
 		text-align: center;
+		margin: .5em 0;
 
+		svg {
+			opacity: 0.7;
+			transition: opacity .23s linear;
+
+			&:hover {
+				opacity: 1;
+				cursor: pointer;
+			}
+		}
 
 		img {
 			box-shadow: .6em .6em 2em .5em $grey, .3em .3em 2em .2em $lightPurple;
@@ -217,7 +238,7 @@ footer {
 .editpanel {
 	display: flex;
 	flex-flow: column wrap;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 
 	form {
@@ -225,13 +246,13 @@ footer {
 
 		label {
 			margin-right: .5em;
-			color: #824BA6;
+			color: $darkPurple;
 			font-weight: bold;
 			text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff;
 		}
 
 		input[type="number"], select {
-			padding: .5em;
+			padding: 1em;
 			border-radius: 2em;
 			border: none;
 			outline: none;
@@ -239,35 +260,39 @@ footer {
 
 		input[type="submit"] {
 			width: 100%;
-			padding: .5em 0;
+			padding: 1em 0;
 			margin-top: .5em;
 			cursor: pointer;
-			border: 1px solid transparent;
+			border: 3px solid $lightPurple;
 			border-radius: 2em;
 			transition: all .43s ease-out;
+			color: darken($darkPurple, 20%);
 
 			&:hover {
 				background-color: lighten($darkPurple, 10%);
 				color: #ffffff;
-				border: 1px solid darken($darkPurple, 10%);
+				border: 3px solid darken($darkPurple, 10%);
 			}
 		}
-
-
 	}
 
-	.editpanel__rotate {
-
+	.editpanel__rotate, .editpanel__filter {
+		width: 100%;
 	}
-
-	.editpanel__filter {
-
-	}
-
 }
 
 .resolution {
-	
+	margin: 1.5em;
+
+	div {
+		margin: .2em 0 .7em .0;
+
+		span {
+			color: $darkPurple;
+			font-weight: bold;
+			text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff;
+		}
+	}
 }
 
 // MSG
@@ -276,12 +301,14 @@ footer {
 	z-index: 11;
 	padding: 10em;
 	border: 3em solid $harsh-red;
+	border-radius: 30%;
 	background-color: #000000;
 	color: $harsh-red;
-	text-shadow: 1em 1em 1em #ffffff, -1em 1em 1em #ffffff, 1em -1em 1em #ffffff, -1em -1em 1em #ffffff; 
+	box-shadow: .6em .6em 2em .5em $grey, -.6em .6em 2em .5em $grey, .6em -.6em 2em .5em $grey, -.6em -.6em 2em .5em $grey;
+	text-shadow: .5em .5em 1em #ffffff, -.5em .5em 1em #ffffff, .5em -.5em 1em #ffffff, -.5em -.5em 1em #ffffff; 
 
 	h1 {
-		font-size: 5eml
+		font-size: 3em;
 	}
 }
 
@@ -289,6 +316,10 @@ footer {
 // animations
 .fadein {
 	animation: fadein 2s;
+}
+
+.fastfadein {
+	animation: fadein .8s;
 }
 
 @keyframes fadein {
@@ -367,23 +398,23 @@ footer {
 
 // MEDIA QUERIES
 @media only screen and (max-width: 1380px) {
-  .container {
-
-  }
-
-  .userpanel {
-
-  	.image {
-
-			img {
-				max-width: 700px;
-				max-height: 450px;
-			}
+	.image {
+		img {
+			max-width: 700px;
+			max-height: 450px;
 		}
-  }
+	}
 
   .loader-container {
   	top: 200px;
+  }
+
+  .alert {
+  	padding: 3em;
+
+  	h1 {
+  		font-size: 2em;
+  	}
   }
 }
 
@@ -398,15 +429,35 @@ footer {
   	flex-flow: column wrap;
   	
   	.image {
-
 			img {
 				max-width: 400px;
-				max-height: 450px;
+				max-height: 250px;
 			}
 		}
   }
 
-  .resolution {
-  	margin-top: 1.5em;
+  .alert {
+  	padding: 3em;
+
+  	h1 {
+  		font-size: 2em;
+  	}
+  }	
+}
+
+@media only screen and (max-height: 800px) and (max-width: 720px) {
+  .container {
+  	display: flex;
+  	flex-flow: row wrap;
   }
+
+  .userpanel {
+  
+  	.image {
+			img {
+				max-width: 400px;
+				max-height: 250px;
+			}
+		}
+  }	
 }

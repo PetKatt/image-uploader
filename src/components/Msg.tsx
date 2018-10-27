@@ -6,7 +6,7 @@ interface Props {
 
 
 export default (props: Props) => (
-	<div className="alert">
+	<div className="alert fastfadein">
 		<h1>{props.alertMsg}</h1>
 	</div>
 );

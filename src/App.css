@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700,700i");
 body, h1, h2, h3, h4, h5, h6, p, ul, ol {
   margin: 0; }
 
@@ -84,7 +84,10 @@ div {
 
 .welcome {
   display: flex;
-  flex-flow: column wrap; }
+  flex-flow: column wrap;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 5px; }
   .welcome h1, .welcome h2, .welcome h4 {
     margin: .6em 0; }
 
@@ -98,10 +101,17 @@ div {
 
 header {
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 1em; }
   header h2 {
-    font-size: 2em;
-    text-shadow: 5px 0 8px #824BA8; }
+    font-size: 2.8em;
+    letter-spacing: .15em;
+    line-height: 1em;
+    text-shadow: 5px 0 8px #824BA8;
+    transition: text-shadow .23s ease .1s; }
+    header h2:hover {
+      text-shadow: 5px 0 8px #824BA8, 5px 5px 10px #f9f7fb, -5px -5px 10px #f9f7fb;
+      cursor: pointer; }
 
 .input {
   display: flex;
@@ -143,7 +153,14 @@ footer {
   align-items: center;
   justify-content: space-around; }
   .userpanel .image {
-    text-align: center; }
+    text-align: center;
+    margin: .5em 0; }
+    .userpanel .image svg {
+      opacity: 0.7;
+      transition: opacity .23s linear; }
+      .userpanel .image svg:hover {
+        opacity: 1;
+        cursor: pointer; }
     .userpanel .image img {
       box-shadow: 0.6em 0.6em 2em 0.5em #252525, 0.3em 0.3em 2em 0.2em #A982C1;
       max-width: 1200px;
@@ -152,46 +169,63 @@ footer {
 .editpanel {
   display: flex;
   flex-flow: column wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center; }
   .editpanel form {
     margin: 1.5em 0; }
     .editpanel form label {
       margin-right: .5em;
-      color: #824BA6;
+      color: #824BA8;
       font-weight: bold;
       text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff; }
     .editpanel form input[type="number"], .editpanel form select {
-      padding: .5em;
+      padding: 1em;
       border-radius: 2em;
       border: none;
       outline: none; }
     .editpanel form input[type="submit"] {
       width: 100%;
-      padding: .5em 0;
+      padding: 1em 0;
       margin-top: .5em;
       cursor: pointer;
-      border: 1px solid transparent;
+      border: 3px solid #A982C1;
       border-radius: 2em;
-      transition: all .43s ease-out; }
+      transition: all .43s ease-out;
+      color: #4b2c61; }
       .editpanel form input[type="submit"]:hover {
         background-color: #9b6abc;
         color: #ffffff;
-        border: 1px solid #673b85; }
+        border: 3px solid #673b85; }
+  .editpanel .editpanel__rotate, .editpanel .editpanel__filter {
+    width: 100%; }
+
+.resolution {
+  margin: 1.5em; }
+  .resolution div {
+    margin: .2em 0 .7em .0; }
+    .resolution div span {
+      color: #824BA8;
+      font-weight: bold;
+      text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff; }
 
 .alert {
   position: absolute;
   z-index: 11;
   padding: 10em;
   border: 3em solid #f90000;
+  border-radius: 30%;
   background-color: #000000;
   color: #f90000;
-  text-shadow: 1em 1em 1em #ffffff, -1em 1em 1em #ffffff, 1em -1em 1em #ffffff, -1em -1em 1em #ffffff; }
+  box-shadow: 0.6em 0.6em 2em 0.5em #252525, -0.6em 0.6em 2em 0.5em #252525, 0.6em -0.6em 2em 0.5em #252525, -0.6em -0.6em 2em 0.5em #252525;
+  text-shadow: .5em .5em 1em #ffffff, -.5em .5em 1em #ffffff, .5em -.5em 1em #ffffff, -.5em -.5em 1em #ffffff; }
   .alert h1 {
-    font-size: 5eml; }
+    font-size: 3em; }
 
 .fadein {
   animation: fadein 2s; }
+
+.fastfadein {
+  animation: fadein .8s; }
 
 @keyframes fadein {
   from {
@@ -244,11 +278,15 @@ footer {
     transform: scale(1.15, 1.2); } }
 
 @media only screen and (max-width: 1380px) {
-  .userpanel .image img {
+  .image img {
     max-width: 700px;
     max-height: 450px; }
   .loader-container {
-    top: 200px; } }
+    top: 200px; }
+  .alert {
+    padding: 3em; }
+    .alert h1 {
+      font-size: 2em; } }
 
 @media only screen and (max-width: 860px) {
   .container {
@@ -259,6 +297,16 @@ footer {
     flex-flow: column wrap; }
     .userpanel .image img {
       max-width: 400px;
-      max-height: 450px; }
-  .resolution {
-    margin-top: 1.5em; } }
+      max-height: 250px; }
+  .alert {
+    padding: 3em; }
+    .alert h1 {
+      font-size: 2em; } }
+
+@media only screen and (max-height: 800px) and (max-width: 720px) {
+  .container {
+    display: flex;
+    flex-flow: row wrap; }
+  .userpanel .image img {
+    max-width: 400px;
+    max-height: 250px; } }

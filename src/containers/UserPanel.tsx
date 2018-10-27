@@ -41,7 +41,7 @@ class UserPanel extends React.Component<Props, State> {
 		/* Filter */
 		if(this.state.filter === "blur") {
 			const img: any = document.querySelector("img");
-			img.style.filter = `blur(30px)`;
+			img.style.filter = `blur(5px)`;
 		} else if(this.state.filter === "sepia") {
 			const img: any = document.querySelector("img");
 			img.style.filter = `sepia(100%)`;
