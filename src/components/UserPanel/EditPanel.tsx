@@ -7,27 +7,24 @@ interface Props {
 	filter: string,
 	onFilterChange: ((e: any) => void),
 	duotoneObj: object,
-	duotoneObjChange: object
+	duotoneChangeHandler: ((e: any) => void)
 }
 
 
 export default (props: Props) => {
-	const { duotoneObj, duotoneObjChange } = props;
+	const { duotoneObj, duotoneChangeHandler } = props;
 	const colorsKeys: string[] = [];
 	const colorsValues: number[] = [];
-	const duotoneHandlers: any[] = [];
 
 	for (let key in duotoneObj) {
 		colorsKeys.push(key);
 		colorsValues.push(duotoneObj[key]);
 	}
 
-	for (let key in duotoneObjChange) {
-		duotoneHandlers.push(duotoneObjChange[key]);
-	}
-
 	return (
+		/* Edit Panel consists of 3 divisions: rotate, filters, duotone inputs */
 		<div className="editpanel">
+
 			<form className="editpanel__rotate" onSubmit={props.onRotateSubmit}>
 				<label htmlFor="rotate">Rotate:</label>
 				<input 
@@ -38,32 +35,35 @@ export default (props: Props) => {
 				<input type="submit" value="Rotate" />
 			</form>
 
-			<form className="editpanel__filter">
+			<div className="editpanel__filter">
 	    	<label>Choose filter:</label>
 	      <select value={props.filter} onChange={props.onFilterChange}>
+	      	<option value="none">None</option>
 	      	<option value="grayscale">Black and White</option>
 	      	<option value="duotone">Duotone</option>
 	        <option value="invert">Invert</option>
 	        <option value="sepia">Sepia</option>
 	      </select>
-	    </form>
+	    </div>
 
-	    <fieldset>
-	    <legend>Duotone variables:</legend>
-	    { 
-	    	colorsKeys.map((key, i) => {
-		    	return (
-		    		<label>{`${key}:  `} 
-			    		<input 
-			    			type="number"
-			    			id={`${key}__${i}`}
-			    			value={colorsValues[i]}
-			    			onChange={duotoneHandlers[i]} />
-		    		</label>
-		    	);
-		    }) 
-		  }
+	    <fieldset className="editpanel__duotone">
+		    <legend>Duotone variables:</legend>
+		    { 
+		    	colorsKeys.map((key, i) => {
+			    	return (
+			    		<label>{`${key}:  `} 
+				    		<input 
+				    			type="number"
+				    			name={key}
+				    			id={`${key}__${i}`}
+				    			value={colorsValues[i]}
+				    			onChange={duotoneChangeHandler} />
+			    		</label>
+			    	);
+			    }) 
+			  }
 	    </fieldset>
+
 		</div>
 	);
 }

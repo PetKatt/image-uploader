@@ -34,11 +34,11 @@ class Container extends React.Component<object, State> {
   }
 
   imageSelectedHandler = (event: any) => {
-    // console.log(event.target.files[0]);
     const myImage = event.target.files[0];
     const formData = new FormData();
     const types = ['image/jpeg', 'image/png', 'image/gif'];
 
+    /* validating input data*/
     if(types.every(type => myImage.type !== type)) {
       this.setState({ alertMsg: "Your image has invalid format! :(" });
     } else if(myImage.size > 200000) {
@@ -47,7 +47,7 @@ class Container extends React.Component<object, State> {
       formData.append("myImage", myImage);
     }
 
-    // UPLOADING START
+    /* START UPLOADING */
     this.setState({ uploading: true }); 
     fetch(`${API_URL}/upload`, {
       method: "POST",
@@ -77,16 +77,20 @@ class Container extends React.Component<object, State> {
 	public render() {
     const { initializing, uploading, images, alertMsg } = this.state;
     
-    const content = () => {
+    const content = (): any => {
       switch(true) {
         case initializing:
           return <Welcome />;
+          break;
         case images.length > 0:
           return <UserPanel images={images} />;
+          break;
         case uploading:
           return <SpinLoader />;
+          break;
         default:
           return <InputFile onChange={this.imageSelectedHandler} />;
+          break;
       }
     }
 

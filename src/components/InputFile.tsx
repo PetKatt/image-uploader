@@ -6,6 +6,7 @@ interface Props {
 	onChange: ((e: any) => void)
 }
 
+
 export default (props: Props) => (
 	<div className="input fadein">
 		<label htmlFor="fileInput">

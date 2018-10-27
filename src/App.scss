@@ -212,7 +212,10 @@ footer {
 	justify-content: space-around;
 
 	.image {
+		margin: 1.5em 0;
 		box-shadow: .6em .6em 2em .5em $grey, .3em .3em 2em .2em $lightPurple;
+		max-width: 1200px;
+		max-height: 750px;
 	}
 }
 
@@ -239,7 +242,7 @@ footer {
 			text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff;
 	}
 
-	form {
+	form, div {
 		margin: 1.5em 0;
 
 		input[type="submit"] {
@@ -404,6 +407,11 @@ footer {
   	top: 200px;
   }
 
+  .image {
+  	max-width: 700px;
+		max-height: 450px;
+  }
+
   .alert {
   	padding: 3em;
 
@@ -422,6 +430,11 @@ footer {
   .userpanel {
   	display: flex;
   	flex-flow: column wrap;
+
+  	.image {
+	  	max-width: 400px;
+			max-height: 250px;
+	  }
   }
 
   .alert {

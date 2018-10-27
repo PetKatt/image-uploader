@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+
 export default () => (
 	<div className="welcome fadein">
 		<h1>WELCOME</h1>

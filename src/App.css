@@ -152,7 +152,10 @@ footer {
   align-items: center;
   justify-content: space-around; }
   .userpanel .image {
-    box-shadow: 0.6em 0.6em 2em 0.5em #252525, 0.3em 0.3em 2em 0.2em #A982C1; }
+    margin: 1.5em 0;
+    box-shadow: 0.6em 0.6em 2em 0.5em #252525, 0.3em 0.3em 2em 0.2em #A982C1;
+    max-width: 1200px;
+    max-height: 750px; }
 
 .editpanel {
   display: flex;
@@ -170,9 +173,9 @@ footer {
     color: #824BA8;
     font-weight: bold;
     text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff; }
-  .editpanel form {
+  .editpanel form, .editpanel div {
     margin: 1.5em 0; }
-    .editpanel form input[type="submit"] {
+    .editpanel form input[type="submit"], .editpanel div input[type="submit"] {
       width: 100%;
       padding: .5em 0;
       margin-top: .5em;
@@ -181,7 +184,7 @@ footer {
       border-radius: 2em;
       transition: all .43s ease-out;
       color: #4b2c61; }
-      .editpanel form input[type="submit"]:hover {
+      .editpanel form input[type="submit"]:hover, .editpanel div input[type="submit"]:hover {
         background-color: #9b6abc;
         color: #ffffff;
         border: 3px solid #673b85; }
@@ -280,6 +283,9 @@ footer {
 @media only screen and (max-width: 1380px) {
   .loader-container {
     top: 200px; }
+  .image {
+    max-width: 700px;
+    max-height: 450px; }
   .alert {
     padding: 3em; }
     .alert h1 {
@@ -292,6 +298,9 @@ footer {
   .userpanel {
     display: flex;
     flex-flow: column wrap; }
+    .userpanel .image {
+      max-width: 400px;
+      max-height: 250px; }
   .alert {
     padding: 3em; }
     .alert h1 {
