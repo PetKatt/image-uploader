@@ -17,12 +17,16 @@ class App extends React.Component<any, any> {
 
     return (
       <div className="App fadein">
-        <Container />
-        <div className="left-screen"></div>
-        <div className="right-screen"></div>
-        <div className="loader-container">
-        	<div className="loader"></div>
-        </div>
+        <main>
+          <Container />
+        </main>
+        <section>
+          <div className="left-screen"></div>
+          <div className="right-screen"></div>
+          <div className="loader-container">
+          	<div className="loader"></div>
+          </div>
+        </section>
       </div>
     );
   }

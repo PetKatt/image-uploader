@@ -128,12 +128,13 @@ div {
 	width: 100%;
 	height: 100vh;
 	display: flex;
-	flex-flow: column wrap;
+	flex-flow: column nowrap;
 	align-items: center;
 	justify-content: space-around;
 }
 
 header {
+	display: inline-block;
 	text-align: center;
 	margin-bottom: 1em;
 
@@ -212,10 +213,19 @@ footer {
 	justify-content: space-around;
 
 	.image {
+		opacity: 0.9;
 		margin: 1.5em 0;
 		box-shadow: .6em .6em 2em .5em $grey, .3em .3em 2em .2em $lightPurple;
-		max-width: 1200px;
-		max-height: 750px;
+		transition: opacity .23s ease .1s; 
+
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
+		img {
+			max-width: 800px;
+			max-height: 750px;
+		}
 	}
 }
 
@@ -228,11 +238,13 @@ footer {
 	justify-content: center;
 
 	input, select {
+		text-align: center;
 		padding: .5em;
 		padding: .5em;
 		border-radius: 2em;
 		border: none;
 		outline: none;
+		background-color: #ffffff;
 	}
 
 	label, legend {
@@ -242,7 +254,7 @@ footer {
 			text-shadow: .5px .5px .2px #ffffff, -.5px .5px .2px #ffffff, .5px -.5px .2px #ffffff, -.5px -.5px .2px #ffffff;
 	}
 
-	form, div {
+	form, div, fieldset {
 		margin: 1.5em 0;
 
 		input[type="submit"] {
@@ -263,8 +275,12 @@ footer {
 		}
 	}
 
-	.editpanel__rotate, .editpanel__filter {
+	.editpanel__rotate, .editpanel__filter, .editpanel__duotone {
 		width: 100%;
+	}
+
+	fieldset:disabled {
+		display: none;
 	}
 
 	fieldset {
@@ -275,7 +291,43 @@ footer {
 		flex-flow: column wrap;
 
 		input {
-			margin: 0 0 .3em 0;
+			-webkit-appearance: none;
+			margin: 0 5px 0 4px;
+			padding: 0 .5em;
+			width: 140px;
+			height: 20px;
+			cursor: pointer;
+			background-color: $lightPurple;
+			box-shadow: 1px 1px 5px 0px darken($lightPurple, 60%);
+			opacity: .7;
+			transition: all .43s ease .1s;
+
+			&:hover {
+				opacity: 1;
+				box-shadow: 1px 1px 5px 0px white;
+			}
+
+			&::-webkit-slider-thumb {
+					-webkit-appearance: none;
+					width: 30px;
+					height: 15px;
+					cursor: pointer;
+					background: black;
+					border-radius: 50%;
+					box-shadow: 2px 2px 2px 2px lighten(#000000, 80%), -2px -2px 2px 2px lighten(#000000, 80%), -2px 2px 2px 2px lighten(#000000, 80%), 2px -2px 2px 2px lighten(#000000, 80%);
+				}
+		}
+
+		input[id="colorOneRED"], input[id="colorTwoRED"] {
+			animation: colorfulRed 2s linear infinite alternate;
+		}
+
+		input[id="colorOneGREEN"], input[id="colorTwoGREEN"] {
+			animation: colorfulGreen 2s linear infinite alternate;
+		}
+
+		input[id="colorOneBLUE"], input[id="colorTwoBLUE"] {
+			animation: colorfulBlue 2s linear infinite alternate;
 		}
 
 		label {
@@ -400,6 +452,33 @@ footer {
 	}
 }
 
+@keyframes colorfulRed {
+	from {
+		background-color: $lightPurple;
+	}
+	to {
+		background-color: $red;
+	}
+}
+
+@keyframes colorfulGreen {
+	from {
+		background-color: $lightPurple;
+	}
+	to {
+		background-color: $limo;
+	}
+}
+
+@keyframes colorfulBlue {
+	from {
+		background-color: $lightPurple;
+	}
+	to {
+		background-color: #5983B1;
+	}
+}
+
 
 // MEDIA QUERIES
 @media only screen and (max-width: 1380px) {
@@ -408,8 +487,10 @@ footer {
   }
 
   .image {
-  	max-width: 700px;
-		max-height: 450px;
+  	img {
+	  	max-width: 600px;
+			max-height: 450px;
+		}
   }
 
   .alert {
@@ -421,7 +502,23 @@ footer {
   }
 }
 
+@media only screen and (max-width: 1100px) {
+	.image {
+  	img {
+	  	max-width: 500px;
+			max-height: 360px;
+		}
+  }
+}
+
 @media only screen and (max-width: 860px) {
+	header {
+		h2 {
+			font-size: 2em;
+			letter-spacing: .1em;
+			line-height: 1em;
+		}
+	}
   .container {
   	display: flex;
   	flex-flow: column wrap;
@@ -432,8 +529,10 @@ footer {
   	flex-flow: column wrap;
 
   	.image {
-	  	max-width: 400px;
-			max-height: 250px;
+  		img {
+		  	max-width: 400px;
+				max-height: 250px;
+			}
 	  }
   }
 
@@ -446,9 +545,16 @@ footer {
   }	
 }
 
-@media only screen and (max-height: 800px) and (max-width: 720px) {
-  .container {
+@media only screen and (max-width: 780px) and (max-height: 1040px) {
+	container {
   	display: flex;
-  	flex-flow: row wrap;
+  	flex-flow: column wrap;
+  }
+
+  .image {
+  	img {
+  		max-width: 600px;
+			max-height: 450px;
+  	}
   }
 }

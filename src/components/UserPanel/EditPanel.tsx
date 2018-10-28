@@ -7,12 +7,13 @@ interface Props {
 	filter: string,
 	onFilterChange: ((e: any) => void),
 	duotoneObj: object,
-	duotoneChangeHandler: ((e: any) => void)
+	duotoneChangeHandler: ((e: any) => void),
+	disabled: boolean
 }
 
 
 export default (props: Props) => {
-	const { duotoneObj, duotoneChangeHandler } = props;
+	const { onRotateSubmit, degree, onRotateChange, filter, onFilterChange, duotoneObj, duotoneChangeHandler, disabled } = props;
 	const colorsKeys: string[] = [];
 	const colorsValues: number[] = [];
 
@@ -22,22 +23,22 @@ export default (props: Props) => {
 	}
 
 	return (
-		/* Edit Panel consists of 3 divisions: rotate, filters, duotone inputs */
+		/* Edit Panel consists of 3 panels: rotate, filters, duotone filters */
 		<div className="editpanel">
 
-			<form className="editpanel__rotate" onSubmit={props.onRotateSubmit}>
+			<form className="editpanel__rotate" onSubmit={onRotateSubmit}>
 				<label htmlFor="rotate">Rotate:</label>
 				<input 
 					type="number" 
 					id="rotate"
-					value={props.degree} 
-					onChange={props.onRotateChange} />
+					value={degree} 
+					onChange={onRotateChange} />
 				<input type="submit" value="Rotate" />
 			</form>
 
 			<div className="editpanel__filter">
 	    	<label>Choose filter:</label>
-	      <select value={props.filter} onChange={props.onFilterChange}>
+	      <select value={filter} onChange={onFilterChange}>
 	      	<option value="none">None</option>
 	      	<option value="grayscale">Black and White</option>
 	      	<option value="duotone">Duotone</option>
@@ -46,18 +47,23 @@ export default (props: Props) => {
 	      </select>
 	    </div>
 
-	    <fieldset className="editpanel__duotone">
+	    <fieldset className="editpanel__duotone" disabled={disabled}>
 		    <legend>Duotone variables:</legend>
 		    { 
 		    	colorsKeys.map((key, i) => {
 			    	return (
-			    		<label>{`${key}:  `} 
+			    		<label key={`${key}__${i}`} htmlFor={key}>
+			    			{/*{`${key}: `}*/} 
 				    		<input 
-				    			type="number"
+				    			type="range"
 				    			name={key}
-				    			id={`${key}__${i}`}
+				    			id={key}
 				    			value={colorsValues[i]}
-				    			onChange={duotoneChangeHandler} />
+				    			onChange={duotoneChangeHandler}
+				    			min={0}
+				    			max={256}
+				    			step={1} />
+				    		<span>{colorsValues[i]}</span>
 			    		</label>
 			    	);
 			    }) 

@@ -22,15 +22,14 @@ class UserPanel extends React.Component<Props, State> {
 		degree: 0,
 		filterSelected: "none",
 		style: {
-			maxWidth: "1000px",
-			maxHeight: "700px"
+			
 		},
 		duotoneObj: {
 			colorOneRED: 40,
-			colorOneGREEN: 120,
+			colorOneGREEN: 80,
 			colorOneBLUE: 120,
-			colorTwoRED: 60,
-			colorTwoGREEN: 150,
+			colorTwoRED: 90,
+			colorTwoGREEN: 200,
 			colorTwoBLUE: 150
 		}
 	}
@@ -50,23 +49,6 @@ class UserPanel extends React.Component<Props, State> {
 		this.setState({ filterSelected: e.target.value });
 	}
 
-	handleWidthChange = (id: string): void => {
-		switch(true) {
-			case id === "undex1380":
-				this.setState({ style: {
-					maxWidth: "700px",
-					maxHeight: "450px"
-				}});
-				break;
-			case id === "under860":
-				this.setState({ style: {
-					maxWidth: "400px",
-					maxHeight: "250px"
-				}});
-				break;
-		}	
-	}
-
 	duotoneChangeHandler = (e: any): void => {
 		let obj: object = this.state.duotoneObj;
 		obj[e.target.name] = e.target.value;
@@ -80,21 +62,13 @@ class UserPanel extends React.Component<Props, State> {
 			boxShadow: ".6em .6em 2em .5em #252525, .3em .3em 2em .2em #A982C1"
 		}
 
-		/* Screen width reading*/
-		const readWidth: ((event: any) => void) = (e) => {
-			let pageX: number = e.pageX;
-			switch(true) {
-				case pageX < 1380 :
-					this.handleWidthChange("under1380");
-					break;
-				case pageX < 860:
-					this.handleWidthChange("under860");
-					break;
-			}
-		}
-		document.body.addEventListener("onLoad", readWidth);
+		/* remove black screens from both sides after animation has been done*/
+		const leftScreen: any = document.body.querySelector("div.left-screen");
+		const rightScreen: any = document.body.querySelector("div.right-screen");
+		leftScreen.style.display = "none";
+		rightScreen.style.display = "none";
 
-		/* resolution data */
+		/* process resolution data */
 		const { images } = this.props;
 		const width: number = images[0].width;
 		const height: number = images[0].height;
@@ -102,7 +76,7 @@ class UserPanel extends React.Component<Props, State> {
 			return width * height;
 		} 
 
-		/* duotone filter arrays*/
+		/* make duotone filter arrays*/
 		const colorOneArray: number[] = [duotoneObj["colorOneRED"], duotoneObj["colorOneGREEN"], duotoneObj["colorOneBLUE"]];
 		const colorTwoArray: number[] = [duotoneObj["colorTwoRED"], duotoneObj["colorTwoGREEN"], duotoneObj["colorTwoBLUE"]];
 
@@ -115,13 +89,14 @@ class UserPanel extends React.Component<Props, State> {
 					degree={degree}
 					filter={filterSelected}
 					duotoneObj={duotoneObj}
-					duotoneChangeHandler={this.duotoneChangeHandler} />
+					duotoneChangeHandler={this.duotoneChangeHandler}
+					disabled={ filterSelected === "duotone" ? false : true } />
 				<ImageFilter
 					className="image fadein"
 					style={style}
 					svgStyle={svgStyle}
 	        image={images[0].secure_url}
-	        filter={ (filterSelected !== "none") ? filterSelected : undefined }
+	        filter={ filterSelected !== "none" ? filterSelected : undefined }
 	        colorOne={ colorOneArray }
 	        colorTwo={ colorTwoArray } />
 				<ResolutionWindow
