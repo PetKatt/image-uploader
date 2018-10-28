@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,700i');
 
+// variables
 $snappy: cubic-bezier(.17,.59,.83,.67);
 $harsh-red: #f90000;
 $grey: #252525; 
@@ -150,8 +151,8 @@ header {
 		white-space: nowrap;
 		margin: 0 auto;
 		animation: 
-    typing 3.5s 2.5s steps(30, end),
-    blink-caret .5s 2.5s step-end infinite;
+    	typing 3.5s 2.5s steps(30, end),
+    	blink-caret .5s 2.5s step-end infinite;
 
 		&:hover {
 			text-shadow: 5px 0 8px $darkPurple, 5px 5px 10px lighten($darkPurple, 50%), -5px -5px 10px lighten($darkPurple, 50%);
@@ -237,6 +238,7 @@ footer {
 			opacity: 1;
 			cursor: pointer;
 		}
+
 		img {
 			max-width: 1000px;
 			max-height: 750px;
@@ -596,7 +598,6 @@ footer {
   		img {
 		  	max-width: 400px;
 				max-height: 250px;
-
 			}
 	  }
   }

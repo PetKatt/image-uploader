@@ -11,7 +11,6 @@ interface Props {
 interface State {
 	degree: number,
 	filterSelected: string,
-	style: object,
 	duotoneObj: object
 }
 
@@ -21,9 +20,6 @@ class UserPanel extends React.Component<Props, State> {
 	state = {
 		degree: 0,
 		filterSelected: "none",
-		style: {
-			
-		},
 		duotoneObj: {
 			colorOneRED: 40,
 			colorOneGREEN: 80,
@@ -57,18 +53,18 @@ class UserPanel extends React.Component<Props, State> {
 
 
 	public render() {
-		const { degree, filterSelected, style, duotoneObj } = this.state;
+		const { degree, filterSelected, duotoneObj } = this.state;
 		const svgStyle: object = {
 			boxShadow: ".6em .6em 2em .5em #252525, .3em .3em 2em .2em #A982C1"
 		}
 
-		/* remove black screens from both sides after animation has been done*/
+		/* remove black screens from both sides after animation has been done */
 		const leftScreen: any = document.body.querySelector("div.left-screen");
 		const rightScreen: any = document.body.querySelector("div.right-screen");
 		leftScreen.style.display = "none";
 		rightScreen.style.display = "none";
 
-		/* process resolution data */
+		/* resolution data */
 		const { images } = this.props;
 		const width: number = images[0].width;
 		const height: number = images[0].height;
@@ -76,7 +72,7 @@ class UserPanel extends React.Component<Props, State> {
 			return width * height;
 		} 
 
-		/* make duotone filter arrays*/
+		/* make duotone filter arrays */
 		const colorOneArray: number[] = [duotoneObj["colorOneRED"], duotoneObj["colorOneGREEN"], duotoneObj["colorOneBLUE"]];
 		const colorTwoArray: number[] = [duotoneObj["colorTwoRED"], duotoneObj["colorTwoGREEN"], duotoneObj["colorTwoBLUE"]];
 
@@ -93,7 +89,6 @@ class UserPanel extends React.Component<Props, State> {
 					disabled={ filterSelected === "duotone" ? false : true } />
 				<ImageFilter
 					className="image fadein"
-					style={style}
 					svgStyle={svgStyle}
 	        image={images[0].secure_url}
 	        filter={ filterSelected !== "none" ? filterSelected : undefined }
