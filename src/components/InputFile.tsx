@@ -8,10 +8,10 @@ interface Props {
 
 
 export default (props: Props) => (
-	<div className="input fadein">
+	<div className="input fadein" role="input">
 		<label htmlFor="fileInput">
 	    <FontAwesomeIcon icon={faFileImage} size="10x" color="#824BA8" />
 	  </label>
-		<input type="file" id="fileInput" onChange={props.onChange} />
+		<input type="file" id="fileInput" onChange={props.onChange} aria-placeholder="upload-your-image" />
 	</div>
 );

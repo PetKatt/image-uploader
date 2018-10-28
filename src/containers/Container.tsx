@@ -95,7 +95,7 @@ class Container extends React.Component<object, State> {
     }
 
 		return (
-      <div className="container">
+      <div className="container" role="uploader">
         <Header removeImage={this.removeImage} />
         {content()}
         { alertMsg ? <Msg alertMsg={alertMsg} /> : null }

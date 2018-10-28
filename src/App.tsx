@@ -20,13 +20,11 @@ class App extends React.Component<any, any> {
         <main>
           <Container />
         </main>
-        <section>
-          <div className="left-screen"></div>
-          <div className="right-screen"></div>
-          <div className="loader-container">
-          	<div className="loader"></div>
-          </div>
-        </section>
+        <div className="left-screen"></div>
+        <div className="right-screen"></div>
+        <div className="loader-container">
+        	<div className="loader"></div>
+        </div>
       </div>
     );
   }

@@ -81,7 +81,7 @@ class UserPanel extends React.Component<Props, State> {
 		const colorTwoArray: number[] = [duotoneObj["colorTwoRED"], duotoneObj["colorTwoGREEN"], duotoneObj["colorTwoBLUE"]];
 
 		return (
-			<div className="userpanel">
+			<div className="userpanel" role="userpanel">
 				<EditPanel 
 					onRotateSubmit={this.handleRotateSubmit}
 					onRotateChange={this.handleRotateChange}

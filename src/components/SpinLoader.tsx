@@ -4,7 +4,7 @@ import { faBomb } from '@fortawesome/free-solid-svg-icons';
 
 
 export default () => (
-  <div className='spinner rotate'>
+  <div className='spinner rotate' role="loading-icon">
     <FontAwesomeIcon icon={faBomb} size='5x' color='#1D3C4C' />
   </div>
  );

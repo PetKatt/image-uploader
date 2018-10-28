@@ -4,7 +4,7 @@ import { faGithub } from '@fortawesome/fontawesome-free-brands';
 
 
 export default () => (
-	<footer>
+	<footer role="author-description">
 		<a
 			href="https://github.com/PetKatt/image-uploader"
 			title="GitHub repository">

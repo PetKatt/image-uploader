@@ -24,19 +24,20 @@ export default (props: Props) => {
 
 	return (
 		/* Edit Panel consists of 3 panels: rotate, filters, duotone filters */
-		<div className="editpanel">
+		<div className="editpanel" role="edit">
 
-			<form className="editpanel__rotate" onSubmit={onRotateSubmit}>
+			<form className="editpanel__rotate" onSubmit={onRotateSubmit} role="rotate">
 				<label htmlFor="rotate">Rotate:</label>
 				<input 
 					type="number" 
 					id="rotate"
 					value={degree} 
-					onChange={onRotateChange} />
+					onChange={onRotateChange}
+					required />
 				<input type="submit" value="Rotate" />
 			</form>
 
-			<div className="editpanel__filter">
+			<div className="editpanel__filter" role="filter">
 	    	<label>Choose filter:</label>
 	      <select value={filter} onChange={onFilterChange}>
 	      	<option value="none">None</option>
@@ -47,7 +48,7 @@ export default (props: Props) => {
 	      </select>
 	    </div>
 
-	    <fieldset className="editpanel__duotone" disabled={disabled}>
+	    <fieldset className="editpanel__duotone" role="tune" disabled={disabled}>
 		    <legend>Duotone variables:</legend>
 		    { 
 		    	colorsKeys.map((key, i) => {

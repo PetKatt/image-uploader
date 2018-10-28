@@ -5,7 +5,7 @@ interface Props {
 }
 
 export default (props: Props) => (
-	<header>
+	<header role="title">
 		<h2 onClick={props.removeImage}>IMAGE UPLOADER</h2>
 	</header>
 );

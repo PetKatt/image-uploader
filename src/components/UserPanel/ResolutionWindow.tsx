@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default (props: Props) => (
-	<div className="resolution">
+	<div className="resolution" role="resolution">
 		<h3>Resolution</h3>
 		<div>{props.imgRes} <span>pixels</span></div>
 		<h3>Width</h3>
