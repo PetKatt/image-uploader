@@ -144,6 +144,15 @@ header {
 		text-shadow: 5px 0 8px $darkPurple;
 		transition: text-shadow .23s ease .1s;
 
+		// typing animation
+		overflow: hidden;
+		border-right: .15em solid orange;
+		white-space: nowrap;
+		margin: 0 auto;
+		animation: 
+    typing 3.5s 2.5s steps(30, end),
+    blink-caret .5s 2.5s step-end infinite;
+
 		&:hover {
 			text-shadow: 5px 0 8px $darkPurple, 5px 5px 10px lighten($darkPurple, 50%), -5px -5px 10px lighten($darkPurple, 50%);
 			cursor: pointer;
@@ -509,6 +518,16 @@ footer {
 	100% {
 		transform: rotate(-1deg);
 	}
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
 }
 
 
